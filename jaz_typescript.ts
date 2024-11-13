@@ -205,3 +205,163 @@ const clientesInactivos = (clientes: Cliente[]): Cliente[] =>
   clientes.filter((cliente) => !cliente.activo);
 
 console.log("Clientes inactivos: ", clientesInactivos(clientes));
+
+// Ejercicio 8: Catálogo de Productos - forEach
+// Crear un array llamado catalogo con varios objetos de productos. Cada producto debe tener las propiedades nombre (string) y precio (number).
+// Usar forEach para imprimir el nombre y el precio de cada producto.
+
+interface Producto2 {
+  nombre: string;
+  precio: number;
+}
+
+const catalogo: Producto2[] = [
+  { nombre: "Producto A", precio: 30 },
+  { nombre: "Producto B", precio: 50 },
+  { nombre: "Producto C", precio: 70 },
+];
+
+catalogo.forEach((producto) => {
+  console.log(`Nombre: ${producto.nombre}, Precio: ${producto.precio}`);
+});
+
+// Ejercicio 9: Catálogo de Productos - filter
+// Utilizar filter para crear un nuevo array llamado productosBaratos que solo contenga los productos con precio menor a 50.
+
+const productosBaratos = catalogo.filter((producto) => producto.precio < 50);
+console.log(productosBaratos);
+
+// Ejercicio 10: Actualización de Inventario - map
+// Utilizar map para crear un nuevo array catalogoConDescuento, donde cada producto tenga un 10% menos de precio.
+
+const catalogoConDescuento = catalogo.map((producto) => ({
+  nombre: producto.nombre,
+  precio: producto.precio * 0.9,
+}));
+
+console.log(catalogoConDescuento);
+
+// Ejercicio 11: Búsqueda de Usuario - find
+// Crear un array llamado usuarios con varios objetos de usuario. Cada usuario debe tener id (number), nombre (string) y activo (boolean).
+// Usar find para buscar el usuario con el id 3.
+// Imprimir en la consola el objeto del usuario encontrado.
+
+interface Usuarios {
+  id: number;
+  nombre: string;
+  activo: boolean;
+}
+
+const usuarios: Usuarios[] = [
+  { id: 1, nombre: "Juan", activo: true },
+  { id: 2, nombre: "Maria", activo: true },
+  { id: 3, nombre: "Pedro", activo: false },
+];
+
+const encontrarUsuario = usuarios.find((usuario) => usuario.id === 3);
+console.log(encontrarUsuario);
+
+// Ejercicio 12: Contador de Usuarios Activos - filter y length
+// Utilizar filter para crear un nuevo array usuariosActivos que contenga solo los usuarios con activo: true.
+// Usar la propiedad length para contar cuántos usuarios activos hay y muestra el resultado en la consola.
+
+const usuariosActivos = usuarios.filter((usuario) => usuario.activo);
+console.log(`Usuarios activos: ${usuariosActivos.length}`);
+
+// Ejercicio 13: Actualización de Estado de Usuarios
+// Usando un bucle forEach, cambiar la propiedad activo de cada usuario a false.
+// Imprimir el array usuarios para verificar que todos los usuarios están inactivos.
+
+usuarios.forEach((usuario) => (usuario.activo = false));
+console.log(usuarios);
+
+// Ejercicio 14: Formateo de Productos para Mostrar - map
+// Usar el array catalogo.
+// Utilizar map para crear un nuevo array productosFormato que contenga
+// el nombre y precio de cada producto como un string en el formato "Producto: [nombre], Precio: $[precio]".
+// Para esto podemos usar template strings `string text ${expression} string text`
+// Imprimir el array productosFormato en la consola.
+
+const productosFormato = catalogo.map(
+  (producto) => `Producto: ${producto.nombre}, Precio: $${producto.precio}`
+);
+
+console.log(productosFormato);
+
+// Ejercicio 15:
+// Con los datos que tenemos, crear una interfaz "User" y aplicarla, para que el siguiente codigo compile sin errores:
+
+interface User {
+  name: string;
+  age: number;
+  occupation: string;
+}
+
+const users: User[] = [
+  {
+    name: "Max Mustermann",
+    age: 25,
+    occupation: "Chimney sweep",
+  },
+  {
+    name: "Kate Müller",
+    age: 23,
+    occupation: "Astronaut",
+  },
+];
+
+function logPerson(user: User) {
+  console.log(` - ${user.name}, ${user.age}`);
+}
+
+console.log("Users:");
+users.forEach(logPerson);
+
+// Ejercicio 16:
+// Vamos a volver a usar la interfaz User del ejercicio anterior.
+// Crear una nueva interfaz Admin segun los datos que tenemos.
+// Corregir el type Person para que acepte dos tipos: User y la nueva interfaz.
+// Corregir la implementacion para aplicar el type Person para que el siguiente codigo compile sin errores.
+
+interface Admin {
+  name: string;
+  age: number;
+  role: string;
+}
+
+type Person = User | Admin;
+
+const persons: Person[] = [
+  {
+    name: "Max Mustermann",
+    age: 25,
+    occupation: "Chimney sweep",
+  },
+  {
+    name: "Jane Doe",
+    age: 32,
+    role: "Administrator",
+  },
+  {
+    name: "Kate Müller",
+    age: 23,
+    occupation: "Astronaut",
+  },
+  {
+    name: "Bruce Willis",
+    age: 64,
+    role: "World saver",
+  },
+];
+
+function logPerson2(person: Person) {
+  console.log(` - ${person.name}, ${person.age}`);
+  if ("occupation" in person) {
+    console.log(` Occupation: ${person.occupation}`);
+  } else if ("role" in person) {
+    console.log(`Role: ${person.role}`);
+  }
+}
+
+console.log("Persons:");
+persons.forEach(logPerson2);
